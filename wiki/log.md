@@ -20,3 +20,4 @@
 
 | 2026/6/15 00:06:39 | ingest | [Կ�׷����ſڵ�Ь�����ˡ�](wiki/journal/2026-06-14-Կ�׷����ſڵ�Ь�����ˡ�.md) (note) |
 | 2026/6/15 00:06:59 | ingest | [Test entry in English - this is a reminder to check the serv…](wiki/journal/2026-06-14-Test entry in English - this is a reminder to check the serv….md) (note) |
+| 2026/6/15 00:07:49 | ingest | [钥匙放在门口的鞋柜上了](wiki/reminders/2026-06-14-钥匙放在门口的鞋柜上了.md) (reminder) |

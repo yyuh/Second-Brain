@@ -31,3 +31,7 @@
 ### 2026-06-14
 
 - [Test entry in English - this is a reminder to check the serv…](wiki/journal/2026-06-14-Test entry in English - this is a reminder to check the serv….md) — 2026/6/15 00:06:59
+
+### 2026-06-14
+
+- [钥匙放在门口的鞋柜上了](wiki/reminders/2026-06-14-钥匙放在门口的鞋柜上了.md) — 2026/6/15 00:07:49
