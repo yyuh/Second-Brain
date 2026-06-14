@@ -1,23 +1,42 @@
 /**
  * Second Brain 输入站 — 独立 Web 服务器
  *
- * 从浏览器接收内容，自动写入 wiki/，git push 到 GitHub。
+ * 从浏览器/飞书接收内容，自动写入 wiki/，git push 到 GitHub。
  * 不依赖 QClaw，独立运行。
  *
  * 启动: node inbox/server.js
  * 打开: http://localhost:3456
+ *
+ * 飞书 Bot 配置（环境变量）:
+ *   FEISHU_APP_ID        — 飞书应用的 APP ID
+ *   FEISHU_APP_SECRET    — 飞书应用的 App Secret
+ *   FEISHU_ENCRYPT_KEY   — 事件回调的 Encrypt Key (AES-256-CBC)
+ *   FEISHU_VERIFY_TOKEN  — 事件回调的 Verification Token
+ *   NGROK_AUTOTOKEN      — ngrok 认证令牌（可选，自动开启隧道）
  */
 
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+const crypto = require('crypto')
 const { execSync } = require('child_process')
+
+// 加载 .env（如果存在）
+try { require('dotenv').config({ path: __dirname + '/.env' }) } catch (e) {}
 
 const ROOT = path.resolve(__dirname, '..')
 const WIKI_DIR = path.join(ROOT, 'wiki')
 const RAW_INBOX_DIR = path.join(ROOT, 'raw', 'inbox')
 const HISTORY_FILE = path.join(ROOT, 'raw', 'inbox', '.history.json')
 const PORT = process.env.PORT || 3456
+
+// 飞书配置（从环境变量读取，不硬编码）
+const FEISHU_CONFIG = {
+  appId: process.env.FEISHU_APP_ID || '',
+  appSecret: process.env.FEISHU_APP_SECRET || '',
+  encryptKey: process.env.FEISHU_ENCRYPT_KEY || '',
+  verifyToken: process.env.FEISHU_VERIFY_TOKEN || '',
+}
 
 // 确保目录存在
 fs.mkdirSync(RAW_INBOX_DIR, { recursive: true })
@@ -89,7 +108,7 @@ const CATEGORY_MAP = {
 
 // ---------- 写入 wiki ----------
 
-function writeToWiki(content, type, title) {
+function writeToWiki(content, type, title, source) {
   const cat = CATEGORY_MAP[type] || CATEGORY_MAP.note
   const now = dateStr()
   const safeTitle = title.replace(/[\\/:*?"<>|]/g, '_').substring(0, 80)
@@ -109,7 +128,7 @@ function writeToWiki(content, type, title) {
     content.trim(),
     '',
     `---`,
-    `_通过输入站 · ${timeStr()}_`,
+    `_通过输入站${source ? ` · ${source}` : ''} · ${timeStr()}_`,
     '',
   ].join('\n')
 
@@ -219,6 +238,148 @@ function saveHistory(entry) {
   fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2), 'utf-8')
 }
 
+// ---------- 飞书 Bot ----------
+
+/**
+ * AES-256-CBC 解密（PKCS7 填充）
+ * Feishu 事件回调使用此方式加密
+ */
+function feishuDecrypt(encryptBase64) {
+  if (!FEISHU_CONFIG.encryptKey) return null
+  const key = Buffer.from(FEISHU_CONFIG.encryptKey, 'base64')
+  const encrypted = Buffer.from(encryptBase64, 'base64')
+  const iv = encrypted.subarray(0, 16)
+  const data = encrypted.subarray(16)
+  const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv)
+  decipher.setAutoPadding(true)
+  const decrypted = Buffer.concat([decipher.update(data), decipher.final()])
+  return JSON.parse(decrypted.toString('utf-8'))
+}
+
+/** 处理飞书消息内容 */
+function parseFeishuMessage(event) {
+  if (!event || !event.message) return null
+  const msg = event.message
+  const msgType = msg.message_type || 'text'
+  const sender = event.sender || {}
+  const chatType = msg.chat_type || 'p2p' // p2p = 私聊, group = 群聊
+
+  let content = ''
+
+  if (msgType === 'text') {
+    try {
+      const parsed = JSON.parse(msg.content || '{}')
+      content = parsed.text || msg.content || ''
+    } catch {
+      content = msg.content || ''
+    }
+  } else if (msgType === 'file' || msgType === 'image') {
+    // 文件/图片消息：存为引用，TODO: 下载文件
+    content = `[收到 ${msgType} 消息: ${msg.message_id}]`
+  } else {
+    content = `[收到 ${msgType} 消息]`
+  }
+
+  return {
+    content: content.trim(),
+    messageId: msg.message_id,
+    senderId: sender.sender_id?.user_id || 'unknown',
+    chatType,
+    raw: msg,
+  }
+}
+
+/** processingMiddleware：将内容送入大脑 */
+function processFeishuContent(feishuMsg, sourceLabel) {
+  const { content } = feishuMsg
+  if (!content || content.startsWith('[收到 ')) {
+    console.log(`[飞书] ⏭️ 跳过非文本消息: ${content}`)
+    return { skipped: true }
+  }
+
+  const type = classifyContent(content, 'auto')
+  const title = generateTitle(content, type)
+  const result = writeToWiki(content, type, title, `飞书 · ${sourceLabel}`)
+
+  const rawFile = path.join(RAW_INBOX_DIR, `${timestamp()}-feishu-${type}.md`)
+  fs.writeFileSync(rawFile, [
+    `# ${title}`,
+    `> 来源: 飞书 Bot · ${timeStr()}`,
+    `> 飞书消息ID: ${feishuMsg.messageId}`,
+    `> 发送者: ${feishuMsg.senderId}`,
+    `> 类型: ${type}`,
+    ``,
+    content.trim(),
+  ].join('\n'), 'utf-8')
+
+  updateIndex(type, title, result.relativePath)
+  updateLog(type, title, result.relativePath)
+  gitCommitPush(type, title)
+
+  saveHistory({
+    title,
+    type,
+    path: result.relativePath,
+    time: timeStr(),
+    source: 'feishu',
+    contentPreview: content.substring(0, 100),
+  })
+
+  return { success: true, path: result.relativePath, type, title }
+}
+
+/**
+ * POST /api/feishu/webhook — 飞书事件回调入口
+ *
+ * 处理:
+ * 1. URL Challenge (验证)
+ * 2. im.message.receive_v1 (收到消息)
+ */
+app.post('/api/feishu/webhook', (req, res) => {
+  const body = req.body || {}
+
+  // === URL Challenge 验证 ===
+  if (body.challenge) {
+    console.log(`[飞书] 🔐 URL Challenge 验证`)
+    return res.json({ challenge: body.challenge })
+  }
+
+  // === 加密事件 ===
+  if (body.encrypt) {
+    let event
+    try {
+      event = feishuDecrypt(body.encrypt)
+    } catch (e) {
+      console.error('[飞书] 解密失败:', e.message)
+      return res.status(200).json({ code: 0 }) // 仍返回 200 避免飞书重试
+    }
+
+    if (!event) {
+      return res.status(200).json({ code: 0 })
+    }
+
+    const eventType = event.header?.event_type || event.type || 'unknown'
+    console.log(`[飞书] 📩 事件: ${eventType}`)
+
+    // 处理消息
+    if (eventType === 'im.message.receive_v1' || eventType === 'im.message.receive_v1') {
+      const msg = parseFeishuMessage(event.event)
+      if (!msg) {
+        return res.json({ code: 0 })
+      }
+
+      console.log(`[飞书] 💬 来自 ${msg.senderId}: ${msg.content.substring(0, 60)}`)
+      processFeishuContent(msg, '飞书')
+    }
+
+    return res.json({ code: 0 })
+  }
+
+  // 未知请求
+  console.log('[飞书] ⚠️ 未知请求:', JSON.stringify(body).substring(0, 200))
+  res.status(200).json({ code: 0 })
+})
+
 // ---------- Routes ----------
 
 app.post('/api/ingest', (req, res) => {
@@ -293,12 +454,44 @@ app.get('/', (req, res) => {
 
 // ---------- Start ----------
 
-app.listen(PORT, () => {
-  console.log(`\n🧠 Second Brain 输入站`)
-  console.log(`   地址: http://localhost:${PORT}`)
-  console.log(`   工作目录: ${ROOT}`)
-  console.log(`   Ctrl+C 停止\n`)
-})
+async function start() {
+  // 启动 HTTP 服务
+  app.listen(PORT, async () => {
+    console.log(`\n🧠 Second Brain 输入站`)
+    console.log(`   🌐 本地: http://localhost:${PORT}`)
+    console.log(`   📁 工作目录: ${ROOT}`)
+    console.log(`   ⌨️  Ctrl+C 停止\n`)
+
+    // 飞书状态
+    if (FEISHU_CONFIG.appId && FEISHU_CONFIG.encryptKey) {
+      console.log(`   ✅ 飞书 Bot 已配置 (${FEISHU_CONFIG.appId})`)
+      console.log(`   ⚠️  需要 HTTPS 隧道暴露端口 ${PORT} 给飞书回调`)
+      console.log(`      飞书回调地址: POST /api/feishu/webhook\n`)
+
+      // 如果有 ngrok token，自动创建隧道
+      if (process.env.NGROK_AUTOTOKEN) {
+        try {
+          const ngrok = require('@ngrok/ngrok')
+          const listener = await ngrok.forward({
+            addr: PORT,
+            authtoken: process.env.NGROK_AUTOTOKEN,
+          })
+          console.log(`   🔗 ngrok 隧道: ${listener.url()}`)
+          console.log(`   📌 飞书回调地址设为: ${listener.url()}/api/feishu/webhook\n`)
+        } catch (e) {
+          console.log(`   ⚠️  ngrok 隧道启动失败: ${e.message}`)
+          console.log(`      手动运行: npx ngrok http ${PORT}\n`)
+        }
+      } else {
+        console.log(`      手动运行: npx ngrok http ${PORT}\n`)
+      }
+    } else {
+      console.log(`   ❌ 飞书 Bot 未配置（设置环境变量 FEISHU_APP_ID 等）\n`)
+    }
+  })
+}
+
+start().catch(e => console.error('启动失败:', e.message))
 
 // ---------- Utils ----------
 

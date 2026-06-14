@@ -10,3 +10,8 @@ Thumbs.db
 node_modules/
 package.json
 package-lock.json
+
+# Environment
+.env
+.env.local
+.inbox.env
