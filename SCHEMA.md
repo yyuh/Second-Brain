@@ -92,7 +92,18 @@ LLM 接收到泰明的每条消息后，自动判断并执行：
 
 ### D. DeepSeek 对话 → 定期挖掘
 LLM 定期读取泰明的 DeepSeek 对话记录，提取有价值的问答，分类补充到智者和 Second Brain。
-（具体实现待泰明确认 DeepSeek 访问方式）
+
+**数据来源**（按优先级）：
+1. `raw/deepseek/` 目录中的手动导出/粘贴文件 → LLM 自动检测并处理
+2. `extract-deepseek.mjs` — Playwright 脚本，读取 xbrowser Edge 配置中的 DeepSeek IndexedDB（需要先运行）
+3. 用户直接粘贴的对话文本
+
+**处理流程**：
+1. 检测 raw/deepseek/ 是否有新文件
+2. 提取 Q&A 对，识别核心观点
+3. 文章/观点类 → 智者提取思维模型
+4. 技术问答/代码类 → Second Brain 归档到 wiki/learning/ 或 wiki/goals/
+5. 原始文件保留在 raw/deepseek/（只读）
 
 ---
 
