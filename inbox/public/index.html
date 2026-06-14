@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>第二大脑 · 输入站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">🧠</div>
+    <div class="header-text">
+      <h1>第二大脑</h1>
+      <span class="subtitle">输入站 · 发什么存什么</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="input-area">
+      <textarea id="contentInput" placeholder="粘贴或输入任何内容...
+
+文章、观点、待办、日记、一段想法——什么都行"
+        rows="8"></textarea>
+      <div class="toolbar">
+        <div class="type-selector">
+          <label>类型</label>
+          <select id="contentType">
+            <option value="auto">自动识别</option>
+            <option value="insight">观点/文章</option>
+            <option value="reminder">待办/提醒</option>
+            <option value="journal">日记/反思</option>
+            <option value="goal">项目/目标</option>
+            <option value="learning">学习/笔记</option>
+            <option value="note">随手记</option>
+          </select>
+        </div>
+        <button id="sendBtn" onclick="sendContent()">
+          <span>发送到大脑</span>
+          <span class="shortcut">↵</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="responseArea" class="response-area hidden">
+      <div class="response-header">
+        <span class="status-icon">✅</span>
+        <span>已存入大脑</span>
+      </div>
+      <div id="responseContent" class="response-content"></div>
+    </div>
+
+    <div id="historyArea" class="history-area">
+      <div class="history-header">
+        <span>📋 最近摄入</span>
+        <button class="refresh-btn" onclick="loadHistory()">刷新</button>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+const API_BASE = ''
+
+async function sendContent() {
+  const content = document.getElementById('contentInput').value.trim()
+  if (!content) return
+
+  const type = document.getElementById('contentType').value
+  const btn = document.getElementById('sendBtn')
+  btn.disabled = true
+  btn.innerHTML = '处理中...'
+
+  try {
+    const res = await fetch(`${API_BASE}/api/ingest`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content, type })
+    })
+    const data = await res.json()
+
+    document.getElementById('contentInput').value = ''
+    showResponse(data)
+    loadHistory()
+  } catch (e) {
+    showResponse({ success: false, error: e.message || '请求失败' })
+  } finally {
+    btn.disabled = false
+    btn.innerHTML = '<span>发送到大脑</span><span class="shortcut">↵</span>'
+  }
+}
+
+function showResponse(data) {
+  const area = document.getElementById('responseArea')
+  const content = document.getElementById('responseContent')
+  area.classList.remove('hidden')
+
+  if (data.success) {
+    document.querySelector('.response-header .status-icon').textContent = '✅'
+    content.innerHTML = `
+      <div class="file-info">
+        <div class="info-row"><span class="label">📁 位置</span><span class="value">${data.path || '-'}</span></div>
+        <div class="info-row"><span class="label">🔖 类型</span><span class="value">${data.type || '-'}</span></div>
+        <div class="info-row"><span class="label">📎 git</span><span class="value">${data.commit || '-'}</span></div>
+      </div>
+      ${data.insightNote ? `<div class="note">${data.insightNote}</div>` : ''}
+    `
+  } else {
+    document.querySelector('.response-header .status-icon').textContent = '❌'
+    content.innerHTML = `<div class="error">${data.error || '未知错误'}</div>`
+  }
+
+  setTimeout(() => {
+    area.classList.add('hidden')
+  }, 8000)
+}
+
+async function loadHistory() {
+  try {
+    const res = await fetch(`${API_BASE}/api/history`)
+    const data = await res.json()
+    const list = document.getElementById('historyList')
+
+    if (!data.items || data.items.length === 0) {
+      list.innerHTML = '<div class="empty">还没有摄入记录</div>'
+      return
+    }
+
+    list.innerHTML = data.items.slice(0, 10).map(item => `
+      <div class="history-item">
+        <span class="h-type ${item.type}">${item.type}</span>
+        <span class="h-title">${escapeHtml(item.title || '无标题')}</span>
+        <span class="h-time">${item.time || ''}</span>
+      </div>
+    `).join('')
+  } catch (e) {
+    // silent
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div')
+  div.textContent = str
+  return div.innerHTML
+}
+
+// Ctrl+Enter to send
+document.getElementById('contentInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    sendContent()
+  }
+})
+
+loadHistory()
+// Auto-refresh history every 30s
+setInterval(loadHistory, 30000)
+</script>
+</body>
+</html>

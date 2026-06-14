@@ -17,3 +17,5 @@
 - 配置主动联系系统：7:00-23:00，2h 无消息主动讨论（HEARTBEAT.md）
 - 初始化 git 仓库（second-brain + 智者），配置 commit 规范
 - 待定：GitHub 远程仓库名、DeepSeek 对话访问方式
+
+| 2026/6/15 00:06:39 | ingest | [Կ�׷����ſڵ�Ь�����ˡ�](wiki/journal/2026-06-14-Կ�׷����ſڵ�Ь�����ˡ�.md) (note) |
