@@ -8,3 +8,12 @@
 - 创建 index.md（全库目录）和 log.md（本文件）
 - 预填充种子页面：李泰明、项目、投资学习、思维模型
 - 基于 LLM Wiki 方法论（`raw/llm-wiki.md`）
+
+## [2026-06-14] upgrade | 双系统架构 v2 + 自动化
+- SCHEMA.md 升级至 v2：智者 + Second Brain 双系统常驻架构
+- 新增自动路由规则：文章→智者，日常→Second Brain，混合→两边
+- 新增 raw/ 子目录：articles/、screenshots/、reminders/
+- 新增 wiki/reminders/ 目录
+- 配置主动联系系统：7:00-23:00，2h 无消息主动讨论（HEARTBEAT.md）
+- 初始化 git 仓库（second-brain + 智者），配置 commit 规范
+- 待定：GitHub 远程仓库名、DeepSeek 对话访问方式
