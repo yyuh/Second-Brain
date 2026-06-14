@@ -1,6 +1,13 @@
 {
   "items": [
     {
+      "title": "钥匙放在门口的鞋柜上了",
+      "type": "reminder",
+      "path": "wiki/reminders/2026-06-14-钥匙放在门口的鞋柜上了.md",
+      "time": "2026/6/15 00:07:52",
+      "contentPreview": "钥匙放在门口的鞋柜上了"
+    },
+    {
       "title": "Test entry in English - this is a reminder to check the serv…",
       "type": "note",
       "path": "wiki/journal/2026-06-14-Test entry in English - this is a reminder to check the serv….md",
