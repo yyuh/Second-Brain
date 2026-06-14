@@ -335,7 +335,12 @@ function processFeishuContent(feishuMsg, sourceLabel) {
  * 1. URL Challenge (验证)
  * 2. im.message.receive_v1 (收到消息)
  */
+console.log('[DEBUG] 注册飞书路由...')
+// Test route
+app.post('/api/test', (req, res) => res.json({ok: true}))
+// Feishu route
 app.post('/api/feishu/webhook', (req, res) => {
+  console.log('[DEBUG] 飞书路由被调用!')
   const body = req.body || {}
 
   // === URL Challenge 验证 ===
@@ -461,6 +466,10 @@ async function start() {
     console.log(`   🌐 本地: http://localhost:${PORT}`)
     console.log(`   📁 工作目录: ${ROOT}`)
     console.log(`   ⌨️  Ctrl+C 停止\n`)
+
+    // 打印已注册的路由
+    const routes = app._router?.stack?.filter(r => r.route).map(r => `${Object.keys(r.route.methods)} ${r.route.path}`) || []
+    console.log('   路由表:', routes.join(', '), '\n')
 
     // 飞书状态
     if (FEISHU_CONFIG.appId && FEISHU_CONFIG.encryptKey) {

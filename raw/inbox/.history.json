@@ -1,6 +1,13 @@
 {
   "items": [
     {
+      "title": "test",
+      "type": "note",
+      "path": "wiki/journal/2026-06-14-test.md",
+      "time": "2026/6/15 00:25:48",
+      "contentPreview": "test"
+    },
+    {
       "title": "今天在飞书上看到一个有意思的观点",
       "type": "journal",
       "path": "wiki/journal/2026-06-14-今天在飞书上看到一个有意思的观点.md",

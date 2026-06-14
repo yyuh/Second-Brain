@@ -51,3 +51,7 @@
 ### 2026-06-14
 
 - [test](wiki/journal/2026-06-14-test.md) — 2026/6/15 00:25:45
+
+### 2026-06-14
+
+- [hello world](wiki/journal/2026-06-14-hello world.md) — 2026/6/15 00:30:05
