@@ -459,48 +459,37 @@ app.get('/', (req, res) => {
 
 // ---------- Start ----------
 
-async function start() {
-  // 启动 HTTP 服务
-  app.listen(PORT, async () => {
-    console.log(`\n🧠 Second Brain 输入站`)
-    console.log(`   🌐 本地: http://localhost:${PORT}`)
-    console.log(`   📁 工作目录: ${ROOT}`)
-    console.log(`   ⌨️  Ctrl+C 停止\n`)
+app.listen(PORT, () => {
+  console.log(`\n🧠 Second Brain 输入站`)
+  console.log(`   🌐 本地: http://localhost:${PORT}`)
+  console.log(`   📁 工作目录: ${ROOT}`)
+  console.log(`   ⌨️  Ctrl+C 停止\n`)
 
-    // 打印已注册的路由
-    const routes = app._router?.stack?.filter(r => r.route).map(r => `${Object.keys(r.route.methods)} ${r.route.path}`) || []
-    console.log('   路由表:', routes.join(', '), '\n')
+  // 飞书状态
+  if (FEISHU_CONFIG.appId && FEISHU_CONFIG.encryptKey) {
+    console.log(`   ✅ 飞书 Bot 已配置 (${FEISHU_CONFIG.appId})`)
+    console.log(`   ⚠️  需要 HTTPS 隧道暴露端口 ${PORT} 给飞书回调`)
+    console.log(`      飞书回调地址: POST /api/feishu/webhook\n`)
 
-    // 飞书状态
-    if (FEISHU_CONFIG.appId && FEISHU_CONFIG.encryptKey) {
-      console.log(`   ✅ 飞书 Bot 已配置 (${FEISHU_CONFIG.appId})`)
-      console.log(`   ⚠️  需要 HTTPS 隧道暴露端口 ${PORT} 给飞书回调`)
-      console.log(`      飞书回调地址: POST /api/feishu/webhook\n`)
-
-      // 如果有 ngrok token，自动创建隧道
-      if (process.env.NGROK_AUTOTOKEN) {
-        try {
-          const ngrok = require('@ngrok/ngrok')
-          const listener = await ngrok.forward({
-            addr: PORT,
-            authtoken: process.env.NGROK_AUTOTOKEN,
-          })
-          console.log(`   🔗 ngrok 隧道: ${listener.url()}`)
-          console.log(`   📌 飞书回调地址设为: ${listener.url()}/api/feishu/webhook\n`)
-        } catch (e) {
-          console.log(`   ⚠️  ngrok 隧道启动失败: ${e.message}`)
-          console.log(`      手动运行: npx ngrok http ${PORT}\n`)
-        }
-      } else {
+    // 如果有 ngrok token，自动创建隧道
+    if (process.env.NGROK_AUTOTOKEN) {
+      require('@ngrok/ngrok').forward({
+        addr: PORT,
+        authtoken: process.env.NGROK_AUTOTOKEN,
+      }).then(listener => {
+        console.log(`   🔗 ngrok 隧道: ${listener.url()}`)
+        console.log(`   📌 飞书回调地址设为: ${listener.url()}/api/feishu/webhook\n`)
+      }).catch(e => {
+        console.log(`   ⚠️  ngrok 隧道启动失败: ${e.message}`)
         console.log(`      手动运行: npx ngrok http ${PORT}\n`)
-      }
+      })
     } else {
-      console.log(`   ❌ 飞书 Bot 未配置（设置环境变量 FEISHU_APP_ID 等）\n`)
+      console.log(`      手动运行: npx ngrok http ${PORT}\n`)
     }
-  })
-}
-
-start().catch(e => console.error('启动失败:', e.message))
+  } else {
+    console.log(`   ❌ 飞书 Bot 未配置（设置环境变量 FEISHU_APP_ID 等）\n`)
+  }
+})
 
 // ---------- Utils ----------
 

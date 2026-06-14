@@ -26,3 +26,4 @@
 | 2026/6/15 00:22:21 | ingest | [今天在飞书上看到一个有意思的观点](wiki/journal/2026-06-14-今天在飞书上看到一个有意思的观点.md) (journal) |
 | 2026/6/15 00:25:45 | ingest | [test](wiki/journal/2026-06-14-test.md) (note) |
 | 2026/6/15 00:30:05 | ingest | [hello world](wiki/journal/2026-06-14-hello world.md) (note) |
+| 2026/6/15 00:32:47 | ingest | [ping](wiki/journal/2026-06-14-ping.md) (note) |
