@@ -459,6 +459,10 @@ app.get('/', (req, res) => {
 
 // ---------- Start ----------
 
+// Quick test routes
+app.post('/api/debug1', (req, res) => res.json({ok: true}))
+app.post('/api/debug2', (req, res) => res.json({ok: true}))
+
 app.listen(PORT, () => {
   console.log(`\n🧠 Second Brain 输入站`)
   console.log(`   🌐 本地: http://localhost:${PORT}`)
