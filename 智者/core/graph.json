@@ -1,0 +1,441 @@
+{
+  "version": "1.0",
+  "createdAt": "2026-06-13T22:25:00+08:00",
+  "lastUpdated": "2026-06-15T08:30:00+08:00",
+  "relationTypes": {
+    "supports": "A支撑/验证B",
+    "extends": "B从A延伸/深化",
+    "contradicts": "A与B存在张力/矛盾",
+    "example_of": "B是A的具象案例",
+    "triggers": "想到A自然触发B",
+    "related_to": "共享主题/标签"
+  },
+  "edges": [
+    {
+      "source": "m001",
+      "target": "m002",
+      "relation": "supports",
+      "desc": "保险公司模式是无风险基底+杠杆套利的理念层"
+    },
+    {
+      "source": "m002",
+      "target": "m001",
+      "relation": "extends",
+      "desc": "杠杆套利是保险公司模式的具体操作方案"
+    },
+    {
+      "source": "m003",
+      "target": "m002",
+      "relation": "supports",
+      "desc": "复利思维验证了长期杠杆套利的可行性"
+    },
+    {
+      "source": "m004",
+      "target": "m002",
+      "relation": "extends",
+      "desc": "杠杆套利只在特定财富量级有效，呼应分层策略"
+    },
+    {
+      "source": "m005",
+      "target": "m001",
+      "relation": "supports",
+      "desc": "认知不够就驾驭不了期权卖方策略"
+    },
+    {
+      "source": "m005",
+      "target": "m002",
+      "relation": "supports",
+      "desc": "没有认知基础，杠杆套利就是灾难"
+    },
+    {
+      "source": "m005",
+      "target": "m015",
+      "relation": "supports",
+      "desc": "认知建设=读书四阶论的正确路径"
+    },
+    {
+      "source": "m006",
+      "target": "m007",
+      "relation": "triggers",
+      "desc": "单一路径上的困难，恰好就是包装过的礼物"
+    },
+    {
+      "source": "m007",
+      "target": "m006",
+      "relation": "supports",
+      "desc": "困难是礼物→所以不存在绕路，只有必经"
+    },
+    {
+      "source": "m008",
+      "target": "m006",
+      "relation": "triggers",
+      "desc": "人生RPG→新手村到通关只有一条路"
+    },
+    {
+      "source": "m006",
+      "target": "m008",
+      "relation": "example_of",
+      "desc": "单一路径是人生RPG的游戏规则"
+    },
+    {
+      "source": "m009",
+      "target": "m007",
+      "relation": "extends",
+      "desc": "记录是把'困难礼物'拆开的方式"
+    },
+    {
+      "source": "m009",
+      "target": "m005",
+      "relation": "supports",
+      "desc": "记录递进直接构建认知"
+    },
+    {
+      "source": "m010",
+      "target": "m011",
+      "relation": "triggers",
+      "desc": "内心字典不同→沟通冲突→沉默是力量"
+    },
+    {
+      "source": "m012",
+      "target": "m018",
+      "relation": "supports",
+      "desc": "AI渗透一切→人性反而更稀缺更值钱"
+    },
+    {
+      "source": "m018",
+      "target": "m012",
+      "relation": "triggers",
+      "desc": "AI是蒸汽机→越是机器时代，人味越贵"
+    },
+    {
+      "source": "m019",
+      "target": "m018",
+      "relation": "extends",
+      "desc": "AI渗透后，垂直深耕是普通人切入AI的方式"
+    },
+    {
+      "source": "m020",
+      "target": "m012",
+      "relation": "extends",
+      "desc": "数据主权是人性溢价的具象化"
+    },
+    {
+      "source": "m021",
+      "target": "m012",
+      "relation": "supports",
+      "desc": "反算法才能保住人性的稀缺性"
+    },
+    {
+      "source": "m013",
+      "target": "m008",
+      "relation": "extends",
+      "desc": "传记帮你选人生RPG的职业角色"
+    },
+    {
+      "source": "m015",
+      "target": "m013",
+      "relation": "supports",
+      "desc": "读书四阶论第一阶就是传记"
+    },
+    {
+      "source": "m016",
+      "target": "m007",
+      "relation": "triggers",
+      "desc": "困境促扎根=困难是礼物的另一种说法"
+    },
+    {
+      "source": "m017",
+      "target": "m008",
+      "relation": "example_of",
+      "desc": "高考只是人生RPG的一个关卡"
+    },
+    {
+      "source": "m022",
+      "target": "m004",
+      "relation": "contradicts",
+      "desc": "财富分层说策略跟量级走，上层建筑论说权力结构决定一切，包括财富分层本身"
+    },
+    {
+      "source": "m023",
+      "target": "m013",
+      "relation": "triggers",
+      "desc": "剥离社会标签→用故事定义自己→传记寻梦"
+    },
+    {
+      "source": "m024",
+      "target": "m019",
+      "relation": "extends",
+      "desc": "精细化壁垒是垂直深耕的执行层"
+    },
+    {
+      "source": "m024",
+      "target": "m009",
+      "relation": "triggers",
+      "desc": "做到极致需要记录-反馈-改进的循环"
+    },
+    {
+      "source": "m016",
+      "target": "m006",
+      "relation": "supports",
+      "desc": "根扎深了，单一路径才能走到底"
+    },
+    {
+      "source": "m025",
+      "target": "m018",
+      "relation": "extends",
+      "desc": "AI军备竞赛论述深化了AI渗透论——不仅是渗透，是竞争性渗透，停下就出局"
+    },
+    {
+      "source": "m025",
+      "target": "m012",
+      "relation": "supports",
+      "desc": "AI军备越激烈→AI能力越强→人性越稀缺值钱"
+    },
+    {
+      "source": "m025",
+      "target": "m021",
+      "relation": "triggers",
+      "desc": "AI军备竞赛越激烈→个人越需要反算法守住自主"
+    },
+    {
+      "source": "m025",
+      "target": "m005",
+      "relation": "triggers",
+      "desc": "AI军备竞赛时代，认知不够的人连参与讨论的资格都没有"
+    },
+    {
+      "source": "m026",
+      "target": "m004",
+      "relation": "extends",
+      "desc": "结构性通胀加深财富分层——有硬资产者受益，无资产者被通胀剥夺"
+    },
+    {
+      "source": "m026",
+      "target": "m001",
+      "relation": "supports",
+      "desc": "通胀环境→资产价格上涨→卖方策略更安全"
+    },
+    {
+      "source": "m026",
+      "target": "m005",
+      "relation": "triggers",
+      "desc": "通胀环境下认知不足者财富被悄悄稀释，认知驾驭财富更加紧迫"
+    },
+    {
+      "source": "m026",
+      "target": "m025",
+      "relation": "related_to",
+      "desc": "硬件通胀的直接推手是AI军备竞赛的需求暴增"
+    },
+    {
+      "source": "m027",
+      "target": "m018",
+      "relation": "example_of",
+      "desc": "太空经济是AI渗透论的跨领域印证——渗透一切行业的不只是AI"
+    },
+    {
+      "source": "m027",
+      "target": "m024",
+      "relation": "related_to",
+      "desc": "SpaceX的壁垒=极致精细化，精细化壁垒的终极案例"
+    },
+    {
+      "source": "m027",
+      "target": "m003",
+      "relation": "triggers",
+      "desc": "万亿富豪=复利效应+新产业红利的终极体现"
+    },
+    {
+      "source": "m027",
+      "target": "m008",
+      "relation": "triggers",
+      "desc": "太空新地图解锁→人类RPG进入星际扩展包"
+    },
+    {
+      "source": "m028",
+      "target": "m025",
+      "relation": "extends",
+      "desc": "战略性亏损是AI军备竞赛的财务引擎——谁更能亏，谁就能建更深的壁垒"
+    },
+    {
+      "source": "m028",
+      "target": "m005",
+      "relation": "extends",
+      "desc": "理解并驾驭战略性亏损需要全新的财务认知范式——盈利不等于健康"
+    },
+    {
+      "source": "m028",
+      "target": "m026",
+      "relation": "related_to",
+      "desc": "巨头亏损驱动的基建需求直接推高了硬件结构性通胀"
+    },
+    {
+      "source": "m028",
+      "target": "m004",
+      "relation": "supports",
+      "desc": "只有顶级财富量级才玩得起的亏损游戏，加深了财富分层"
+    },
+    {
+      "source": "m028",
+      "target": "m003",
+      "relation": "triggers",
+      "desc": "今天的战略性亏损是为了明天的指数级回报——复利需要前置投入"
+    },
+    {
+      "source": "m028",
+      "target": "m018",
+      "relation": "triggers",
+      "desc": "AI渗透一切→亏损竞争覆盖一切→不参与基础设施层竞赛的企业选择应用层"
+    },
+    {
+      "source": "m029",
+      "target": "m027",
+      "relation": "related_to",
+      "desc": "机器人临界点复刻太空经济轨迹：概念验证→政策推动→资本涌入→实景部署"
+    },
+    {
+      "source": "m029",
+      "target": "m018",
+      "relation": "extends",
+      "desc": "机器人是AI从数字世界渗透到物理世界的终极载体"
+    },
+    {
+      "source": "m029",
+      "target": "m024",
+      "relation": "extends",
+      "desc": "机器人部署要求极致的精细化——硬件精度、软件可靠性、场景适配缺一不可"
+    },
+    {
+      "source": "m029",
+      "target": "m025",
+      "relation": "example_of",
+      "desc": "人形机器人是AI军备竞赛从云端走向物理世界的关键战场"
+    },
+    {
+      "source": "m029",
+      "target": "m019",
+      "relation": "extends",
+      "desc": "机器人赛道需要极度垂直的应用深耕——工厂、医疗、家庭每个场景都是独立战场"
+    },
+    {
+      "source": "m029",
+      "target": "m012",
+      "relation": "triggers",
+      "desc": "机器人越普及→人类的手工/体力劳动越稀缺→人性溢价上升"
+    },
+    {
+      "source": "m028",
+      "target": "m029",
+      "relation": "related_to",
+      "desc": "亏损建AI基础设施→训练更强模型→驱动机器人智能化→临界点加速到来"
+    },
+    {
+      "source": "m027",
+      "target": "m022",
+      "relation": "extends",
+      "desc": "太空经济资本化是上层建筑决定论的极端案例——谁控制近地轨道谁定义太空财产权，权力争夺先于商业规则"
+    },
+    {
+      "source": "m027",
+      "target": "m028",
+      "relation": "related_to",
+      "desc": "SpaceX多年亏损建壁垒→IPO万亿美元回报，是亏损即壁垒论的太空版注脚。烧钱建基础设施的逻辑跨域成立"
+    },
+    {
+      "source": "m025",
+      "target": "m020",
+      "relation": "triggers",
+      "desc": "AI军备竞赛越激烈→算法吞噬数据越多→个人数据主权意识越紧迫→保护自己数据的行为越有价值"
+    },
+    {
+      "source": "m028",
+      "target": "m022",
+      "relation": "supports",
+      "desc": "谁能承受战略性亏损取决于谁能获得资本/权力支持——亏损能力本质上是权力能力的财务表达"
+    },
+    {
+      "source": "m030",
+      "target": "m026",
+      "relation": "related_to",
+      "desc": "地缘溢价常态化直接推高硬件结构性通胀——霍尔木兹海峡收费→全球航运成本上行→半导体供应链成本再叠加"
+    },
+    {
+      "source": "m030",
+      "target": "m001",
+      "relation": "extends",
+      "desc": "地缘溢价让保险公司模式的风险溢价从金融层扩展到地缘层——不仅卖期权保费，所有资产都在被动支付地缘保险费"
+    },
+    {
+      "source": "m030",
+      "target": "m025",
+      "relation": "related_to",
+      "desc": "地缘溢价是AI军备竞赛的供给端加速器——地缘紧张→芯片出口管制→各国加速自主算力竞赛"
+    },
+    {
+      "source": "m030",
+      "target": "m004",
+      "relation": "extends",
+      "desc": "地缘溢价加深财富分层——有硬资产（黄金/能源/稀土）者受益于溢价，无资产者被通胀和成本双重挤压"
+    },
+    {
+      "source": "m031",
+      "target": "m025",
+      "relation": "extends",
+      "desc": "国产替代第二阶段是AI军备竞赛的中国路径——不能只靠买芯片，必须有自己的产能和方向"
+    },
+    {
+      "source": "m031",
+      "target": "m026",
+      "relation": "related_to",
+      "desc": "国产替代短期加剧硬件涨价（自主供给切换成本），但长期缓解结构性通胀（打破进口依赖）"
+    },
+    {
+      "source": "m031",
+      "target": "m024",
+      "relation": "example_of",
+      "desc": "芯联集成选择AI电源+硅光芯片而非通用制程=精细化壁垒的产业级应用——不追大而全，做极度垂直的细分"
+    },
+    {
+      "source": "m031",
+      "target": "m019",
+      "relation": "example_of",
+      "desc": "半导体第二阶段放弃正面追赶台积电→在AI电源/硅光芯片深耕=垂直深耕法则在国家级产业战略层的体现"
+    },
+    {
+      "source": "m032",
+      "target": "m018",
+      "relation": "extends",
+      "desc": "AI物理世界渗透加速是AI渗透论的实时升级——从「将渗透一切」到「正在从四个维度同步渗透一切」"
+    },
+    {
+      "source": "m032",
+      "target": "m029",
+      "relation": "supports",
+      "desc": "HarmonyOS终端+FSD实测+机器人运动会=机器人临界点论的多维度端侧证据"
+    },
+    {
+      "source": "m032",
+      "target": "m012",
+      "relation": "supports",
+      "desc": "AI从四个维度渗透物理世界→自动化覆盖面急剧扩大→人类的手工/判断/人情味更稀缺→人性溢价加速上升"
+    },
+    {
+      "source": "m032",
+      "target": "m021",
+      "relation": "triggers",
+      "desc": "AI渗透物理世界越深→被动消费AI越便捷→算法对你的控制越无孔不入→反算法生存的紧迫性不是降低了，是成倍增加了"
+    },
+    {
+      "source": "m030",
+      "target": "m028",
+      "relation": "related_to",
+      "desc": "地缘风险溢价+AI亏损竞赛=同时拉高资金成本和安全成本——两个「永久挂件」叠加在每一个投资决策上"
+    },
+    {
+      "source": "m031",
+      "target": "m029",
+      "relation": "triggers",
+      "desc": "AI电源和硅光芯片的突破直接降低机器人硬件成本→加速机器人临界点的到来"
+    }
+  ]
+}
