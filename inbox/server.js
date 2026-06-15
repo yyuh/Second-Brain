@@ -327,6 +327,8 @@ app.post('/api/feishu/webhook', function(req, res) {
 
   // Encrypted event
   if (body.encrypt) {
+    // Debug: log first 80 chars of encrypted payload
+    console.log('[飞书] 📦 收到加密数据: ' + body.encrypt.substring(0, 80) + '...')
     var event
     try {
       event = feishuDecrypt(body.encrypt)
