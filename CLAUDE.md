@@ -12,17 +12,24 @@
    - 更新 `wiki/index.md` + `wiki/log.md`
    - git commit + push
 
-2. **文章/观点/有思维框架的内容 → 同时触发智者 skill 处理**
+2. **DeepSeek 扫描**（泰明在线时自动触发）
+   - 静默运行 `node raw/deepseek/extract-deepseek.cjs`
+   - headless 尝试读取 DeepSeek IndexedDB
+   - 有新会话 → 提取 → 分类摄入 → commit + push
+   - 未登录 → 静默退出
+   - 读取 `.scan-state.json`：连续失败 ≥2 天 → 主动问泰明
+
+3. **文章/观点/有思维框架的内容 → 同时触发智者 skill 处理**
    - 智者（已注册为 resident skill）负责提取思维模型
    - 结果归档到 `wiki/insights/`
    - 智者仓库也 git commit + push
 
-3. **提醒/琐事 → 仅进 Second Brain**（智者不处理）
+4. **提醒/琐事 → 仅进 Second Brain**（智者不处理）
 
 ## 主动讨论
 
 - 时间段：每天 7:00-23:00（Asia/Shanghai）
-- 触发：距用户上一条消息超过 2 小时
+- 触发：距用户上一条消息超过 1 小时
 - 行为：主动找话题讨论（最近摄入/模型矛盾/项目进度）
 
 ## 协作

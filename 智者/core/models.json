@@ -1,7 +1,7 @@
 ﻿{
     "version":  "2.4",
-    "lastUpdated":  "2026-06-15T11:45:00+08:00",
-    "totalModels":  38,
+    "lastUpdated":  "2026-06-15T23:07:00+08:00",
+    "totalModels":  41,
     "models":  [
                    {
                        "id":  "m001",
@@ -470,6 +470,27 @@
                                              "m009",
                                              "m006"
                                          ]
+                   },
+                   {
+                       "id":  "m039",
+                       "title":  "Agent外壳决定论",
+                       "tags":  ["AI", "Agent", "大模型", "工具链", "架构"],
+                       "coreView":  "同一个大模型+不同Agent外壳=完全不同的用户体验。外壳比模型本身更影响实际体验。",
+                       "status":  "confirmed"
+                   },
+                   {
+                       "id":  "m040",
+                       "title":  "双核协奏原理",
+                       "tags":  ["AI工具", "协作", "交叉验证", "编程", "效率"],
+                       "coreView":  "Claude Code（架构/攻坚）+Codex（执行/审查）=黄金搭档。多模型交叉验证提升可靠性。",
+                       "status":  "confirmed"
+                   },
+                   {
+                       "id":  "m041",
+                       "title":  "软件进化论",
+                       "tags":  ["工具进化", "AI原生", "软件边界", "智能体"],
+                       "coreView":  "Cursor既是编程软件又是智能体——软件正从'工具'进化为'协作者'。二分法思维会错过本质变化。",
+                       "status":  "confirmed"
                    }
                ]
 }

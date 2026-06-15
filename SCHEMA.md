@@ -90,29 +90,32 @@ LLM 接收到泰明的每条消息后，自动判断并执行：
 4. 在 `second-brain/wiki/insights/` 同步更新摘要页面
 5. git commit + push 智者仓库
 
-### D. DeepSeek 对话 → 定期挖掘
-LLM 定期读取泰明的 DeepSeek 对话记录，提取有价值的问答，分类补充到智者和 Second Brain。
+### D. DeepSeek 对话 → 静默扫描 + 自动摄入
 
-**数据来源**（按优先级）：
-1. `raw/deepseek/` 目录中的手动导出/粘贴文件 → LLM 自动检测并处理
-2. `extract-deepseek.mjs` — Playwright 脚本，读取 xbrowser Edge 配置中的 DeepSeek IndexedDB（需要先运行）
-3. 用户直接粘贴的对话文本
+**扫描规则**：
+- **触发时机**：每次泰明发消息时（泰明在线 = 有机会登录 DeepSeek）
+- **执行方式**：`node raw/deepseek/extract-deepseek.cjs` 完全 headless 静默运行
+  - 登录成功 → 提取新会话 → 保存到 `raw/deepseek/`
+  - 未登录 → 静默退出，state 记录失败次数
+  - 不弹窗、不等待、不打扰
+- **提醒条件**：连续 2 天扫描失败 → LLM 主动问泰明"DeepSeek 登录失效了，要不要处理"
 
-**处理流程**：
-1. 检测 raw/deepseek/ 是否有新文件
+**处理流程（扫描到新内容后）**：
+1. 检测 `raw/deepseek/` 新增了哪些文件
 2. 提取 Q&A 对，识别核心观点
 3. 文章/观点类 → 智者提取思维模型
 4. 技术问答/代码类 → Second Brain 归档到 wiki/learning/ 或 wiki/goals/
 5. 原始文件保留在 raw/deepseek/（只读）
+6. 删除已处理的扫描状态文件
 
 ---
 
-## 四、主动联系规则（7:00-23:00，2 小时无消息）
+## 四、主动联系规则（7:00-23:00，1 小时无消息）
 
 匹配智者 Skill 的行为模式：
 
 - **时间窗口**：每天 7:00 - 23:00（Asia/Shanghai）
-- **触发条件**：距离泰明上一条消息超过 2 小时
+- **触发条件**：距离泰明上一条消息超过 1 小时
 - **行为**：查找 Second Brain 或智者中最近更新/值得讨论的内容，发起一个讨论
   - 可能的讨论话题：最近摄入的观点、项目进展、投资思考、巡检发现问题、推荐探索方向
 - **夜深时段（23:00-7:00）**：静默，不打扰
