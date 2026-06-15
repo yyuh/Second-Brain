@@ -254,14 +254,36 @@ app.get('/api/history', function(req, res) {
 
 function feishuDecrypt(encryptBase64) {
   if (!FEISHU_CONFIG.encryptKey) return null
-  var key = Buffer.from(FEISHU_CONFIG.encryptKey, 'base64')
+
   var encrypted = Buffer.from(encryptBase64, 'base64')
   var iv = encrypted.subarray(0, 16)
   var data = encrypted.subarray(16)
-  var decipher = crypto.createDecipheriv('aes-256-cbc', key, iv)
-  decipher.setAutoPadding(true)
-  var decrypted = Buffer.concat([decipher.update(data), decipher.final()])
-  return JSON.parse(decrypted.toString('utf-8'))
+
+  // Build key candidates: different interpretations of the Encrypt Key
+  var candidates = []
+  var b64 = Buffer.from(FEISHU_CONFIG.encryptKey, 'base64')
+  var raw = Buffer.from(FEISHU_CONFIG.encryptKey, 'utf-8')
+  var hex
+  try { hex = Buffer.from(FEISHU_CONFIG.encryptKey, 'hex') } catch (e) {}
+
+  if (b64.length === 32) candidates.push([b64, 'aes-256-cbc'])
+  else if (b64.length === 24) candidates.push([b64, 'aes-192-cbc'])
+  if (raw.length === 32) candidates.push([raw, 'aes-256-cbc'])
+  if (hex && hex.length === 32) candidates.push([hex, 'aes-256-cbc'])
+  if (hex && hex.length === 16) candidates.push([hex, 'aes-128-cbc'])
+
+  var lastErr = null
+  for (var ci = 0; ci < candidates.length; ci++) {
+    try {
+      var d = crypto.createDecipheriv(candidates[ci][1], candidates[ci][0], iv)
+      d.setAutoPadding(true)
+      var decrypted = Buffer.concat([d.update(data), d.final()]).toString('utf-8')
+      return JSON.parse(decrypted)
+    } catch (e) { lastErr = e }
+  }
+
+  console.error('[飞书] 解密失败 (尝试了 ' + candidates.length + ' 种key格式): ' + (lastErr ? lastErr.message : '未知'))
+  return null
 }
 
 function processFeishuContent(feishuMsg, sourceLabel) {
@@ -314,6 +336,12 @@ app.post('/api/feishu/webhook', function(req, res) {
     }
 
     if (!event) return res.status(200).json({ code: 0 })
+
+    // URL Challenge verification via encrypted payload
+    if (event.type === 'url_verification') {
+      console.log('[飞书] 🔐 URL Challenge 验证 (加密)')
+      return res.json({ challenge: event.challenge })
+    }
 
     var eventType = (event.header && event.header.event_type) || event.type || 'unknown'
     console.log('[飞书] 📩 事件: ' + eventType)
