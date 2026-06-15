@@ -21,7 +21,7 @@ updated: 2026-06-15
 - [投资学习](wiki/learning/投资学习.md) — 定投入门 → 期权策略
 
 ### 💡 insights — 洞察与思维模型
-- [思维模型](wiki/insights/思维模型.md) — 27条已内化模型
+- [思维模型](wiki/insights/思维模型.md) — 41条已内化模型
 - [认知传递终极论](wiki/insights/认知传递终极论.md) — 四个产品的统一底层逻辑：认知传递
 
 ### ❤️ health — 健康

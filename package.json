@@ -1,0 +1,29 @@
+{
+  "name": "second-brain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyuh/Second-Brain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yyuh/Second-Brain/issues"
+  },
+  "homepage": "https://github.com/yyuh/Second-Brain#readme",
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.66.1",
+    "@ngrok/ngrok": "^1.7.0",
+    "classic-level": "^3.0.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "playwright": "^1.60.0"
+  }
+}

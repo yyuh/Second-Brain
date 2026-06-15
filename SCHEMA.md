@@ -60,7 +60,7 @@ second-brain/
 ```
 ~/.qclaw/skills/智者/
 ├── SKILL.md               # 智者技能定义
-├── core/models.json       # 27 条思维模型（主数据库）
+├── core/models.json       # 41 条思维模型（主数据库）
 ├── .git / .gitignore
 └── archive/               # 已处理的原稿归档
 ```
