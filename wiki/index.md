@@ -1,8 +1,8 @@
-﻿---
+---
 title: "Second Brain 目录"
 category: index
 created: 2026-06-14
-updated: 2026-06-15
+updated: 2026-06-16
 ---
 
 # Second Brain 知识库
@@ -29,6 +29,7 @@ updated: 2026-06-15
 
 ### 📝 journal — 日记与反思
 - [日记](wiki/journal/日记.md) — 日常记录
+- [2026-06-16 自媒体+AI赛道讨论](wiki/journal/2026-06-16-自媒体AI赛道讨论.md) — 内容方向讨论记录
 
 ### 📌 reminders — 提醒与待办
 - [提醒](wiki/reminders/提醒.md) — 待办事项
@@ -38,4 +39,4 @@ updated: 2026-06-15
 
 ---
 
-_最后更新：2026-06-15_
+_最后更新：2026-06-16_
