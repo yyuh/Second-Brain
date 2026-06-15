@@ -327,8 +327,7 @@ app.post('/api/feishu/webhook', function(req, res) {
 
   // Encrypted event
   if (body.encrypt) {
-    // Debug: log first 80 chars of encrypted payload
-    console.log('[飞书] 📦 收到加密数据: ' + body.encrypt.substring(0, 80) + '...')
+    console.log('[飞书] 📦 收到加密事件')
     var event
     try {
       event = feishuDecrypt(body.encrypt)
@@ -339,43 +338,58 @@ app.post('/api/feishu/webhook', function(req, res) {
 
     if (!event) return res.status(200).json({ code: 0 })
 
-    // URL Challenge verification via encrypted payload
     if (event.type === 'url_verification') {
       console.log('[飞书] 🔐 URL Challenge 验证 (加密)')
       return res.json({ challenge: event.challenge })
     }
 
     var eventType = (event.header && event.header.event_type) || event.type || 'unknown'
-    console.log('[飞书] 📩 事件: ' + eventType)
+    return handleFeishuEvent(event, eventType, res)
+  }
 
-    if (eventType === 'im.message.receive_v1') {
-      var ev = event.event || {}
-      var msg = ev.message || {}
-      var sender = ev.sender || {}
+  // Unencrypted event callback (v2.0 format)
+  if (body.header && body.header.event_type) {
+    console.log('[飞书] 📩 事件(v2): ' + body.header.event_type)
+    return handleFeishuEvent(body, body.header.event_type, res)
+  }
 
-      var parsedContent = ''
-      if (msg.message_type === 'text') {
-        try { parsedContent = JSON.parse(msg.content || '{}').text || msg.content }
-        catch (e) { parsedContent = msg.content || '' }
-      } else {
-        parsedContent = '[收到 ' + msg.message_type + ' 消息: ' + msg.message_id + ']'
-      }
-
-      console.log('[飞书] 💬 来自 ' + (sender.sender_id ? sender.sender_id.user_id : 'unknown') + ': ' + parsedContent.substring(0, 60))
-
-      processFeishuContent({
-        content: parsedContent.trim(),
-        messageId: msg.message_id,
-        senderId: sender.sender_id ? sender.sender_id.user_id : 'unknown',
-      }, '飞书')
-    }
-
-    return res.json({ code: 0 })
+  // Unencrypted event callback (v1.0 format)
+  if (body.type === 'event_callback') {
+    var evType = (body.event && body.event.type) || 'unknown'
+    console.log('[飞书] 📩 事件(v1): ' + evType)
+    // v1 wraps event info differently
+    return handleFeishuEvent(body, evType, res, true)
   }
 
   console.log('[飞书] ⚠️ 未知请求')
   res.status(200).json({ code: 0 })
 })
+
+function handleFeishuEvent(event, eventType, res, isV1) {
+  if (eventType === 'im.message.receive_v1') {
+    var ev = isV1 ? (event.event || {}) : (event.event || {})
+    var msg = ev.message || {}
+    var sender = ev.sender || {}
+
+    var parsedContent = ''
+    if (msg.message_type === 'text') {
+      try { parsedContent = JSON.parse(msg.content || '{}').text || msg.content }
+      catch (e) { parsedContent = msg.content || '' }
+    } else {
+      parsedContent = '[收到 ' + msg.message_type + ' 消息: ' + msg.message_id + ']'
+    }
+
+    console.log('[飞书] 💬 来自 ' + (sender.sender_id ? sender.sender_id.user_id : 'unknown') + ': ' + parsedContent.substring(0, 60))
+
+    processFeishuContent({
+      content: parsedContent.trim(),
+      messageId: msg.message_id,
+      senderId: sender.sender_id ? sender.sender_id.user_id : 'unknown',
+    }, '飞书')
+  }
+
+  return res.json({ code: 0 })
+}
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
