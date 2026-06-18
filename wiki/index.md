@@ -2,7 +2,7 @@
 title: "Second Brain 目录"
 category: index
 created: 2026-06-14
-updated: 2026-06-16
+updated: 2026-06-18
 ---
 
 # Second Brain 知识库
@@ -15,13 +15,13 @@ updated: 2026-06-16
 - [李泰明](wiki/people/李泰明.md) — 知识库主人，开发者 + 投资者
 
 ### 🎯 goals — 项目与目标
-- [项目](wiki/goals/项目.md) — 富爸爸棋盘游戏、小伴APP
+- [项目](wiki/goals/项目.md) — 富爸爸棋盘游戏、小伴APP、智者skill内容提炼服务
 
 ### 📚 learning — 学习笔记
 - [投资学习](wiki/learning/投资学习.md) — 定投入门 → 期权策略
 
 ### 💡 insights — 洞察与思维模型
-- [思维模型](wiki/insights/思维模型.md) — 41条已内化模型
+- [思维模型](wiki/insights/思维模型.md) — 76条已内化模型（新增分步验证策略/两种金钱逻辑/轻量化角色融合/预训练服务化）
 - [认知传递终极论](wiki/insights/认知传递终极论.md) — 四个产品的统一底层逻辑：认知传递
 
 ### ❤️ health — 健康
@@ -35,8 +35,8 @@ updated: 2026-06-16
 - [提醒](wiki/reminders/提醒.md) — 待办事项
 
 ### 🛠️ tools — 工具与工作流
-- [工具](wiki/tools/工具.md) — 效率工具与配置
+- [工具](wiki/tools/工具.md) — 效率工具与配置、DeepSeek对话技术参考（BMS/AI工具链/开发环境）
 
 ---
 
-_最后更新：2026-06-16_
+_最后更新：2026-06-18_

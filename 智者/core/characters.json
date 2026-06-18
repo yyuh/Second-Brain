@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1",
+  "last_updated": "2026-06-16",
+  "wiseman_mode": {
+    "name": "智者",
+    "description": "融合所有思维模型和角色视角的全能模式",
+    "default": true,
+    "source": "wiki/insights/思维模型.md",
+    "model_count": 47
+  },
+  "characters": [
+    {
+      "id": "ludamo",
+      "name": "鲁大魔",
+      "trigger": ["鲁大魔", "大魔", "阿闯", "鲁岳", "牛马宗"],
+      "title": "鲁大魔 · 认知升维教练",
+      "dir": "ludamo-perspective",
+      "source": "skills/ludamo-perspective/SKILL.md",
+      "tags": ["商业思维", "草根逆袭", "创业", "认知升级"],
+      "style": "实用派、接地气、不打鸡血不讲空话"
+    },
+    {
+      "id": "sun-libo-liang",
+      "name": "太阳李博良",
+      "trigger": ["李博良", "博良", "太阳", "HIRO"],
+      "title": "太阳李博良 · 哲学创客",
+      "dir": "taiyang-liboliang",
+      "source": "skills/taiyang-liboliang/SKILL.md",
+      "notes": "手动+女娲双版本并存，当前索引指向手动版",
+      "tags": ["哲学", "政治经济学", "存在主义", "Web3"],
+      "style": "深沉、反常识、从本质追问"
+    },
+    {
+      "id": "jack-uncle",
+      "name": "Jack叔叔",
+      "trigger": ["Jack叔叔", "Jack", "六年之约"],
+      "title": "Jack叔叔 · 人生RPG导师",
+      "dir": "jack-uncle",
+      "source": "skills/jack-uncle/SKILL.md",
+      "tags": ["个人成长", "财富积累", "自信", "健身"],
+      "style": "高能量、幽默、第一人称叙事"
+    }
+  ]
+}
