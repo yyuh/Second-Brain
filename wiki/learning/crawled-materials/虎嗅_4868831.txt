@@ -1,0 +1,87 @@
+标题: 诺奖得主转投Anthropic，谷歌48小时连失两大牛，内部信仰崩塌？-虎嗅网
+来源: 虎嗅
+链接: https://www.huxiu.com/article/4868831.html?type=text
+字数: 4877
+============================================================
+
+虎嗅APP
+公众号矩阵
+社群矩阵
+我要投稿
+资讯
+24小时
+源流
+视频
+活动/榜单/专题
+妙投
+虎嗅智库
+虎嗅嗅全新升级虎嗅嗅全新升级
+2026-06-20 13:35
+诺奖得主转投Anthropic，谷歌48小时连失两大牛，内部信仰崩塌？
+AppSo
+本文来自微信公众号： APPSO ，作者：发现明日产品的，题图来自：AI生成
+不到 48 小时，谷歌失去了两个 AI 大牛。
+6 月 18 日，Transformer 奠基人之一、谷歌Gemini 团队联席主管 Noam Shazeer宣布再次离开谷歌，重回对手阵营担任 OpenAI 的架构研究负责人。
+两天后，20 日凌晨，曾和 Demis Hassabis 一起拿下2024 年诺贝尔化学奖、Google DeepMind 副总裁兼工程研究员、AlphaFold 的核心功臣 John Jumper 也挥别了度过 9 年时光的谷歌，高调官宣加入 Anthropic。
+John Jumper 在 X 正式宣布，他将离开 Google DeepMind，加入 Anthropic。他很感谢 DeepMind CEO Demis Hassabis 愿意在他博士刚毕业六个月的时候，就给他机会领导整个 AlphaFold 团队，他相信 Google DeepMind 团队还会有更多的发现。
+Google DeepMind CEO 很快转发了这条消息，并表示很感谢 John 在过去 9 年中给予 DeepMind 的非凡合作和出色协作，AlphaFold 是一项伟大的研究。
+不少网友在下面评论，虽然 Demis 和 Google AI 其他工作人员展现了极大的风度"，但是 AlphaFold 的人才流失给 Anthropic，对 Google 来说肯定很不好受。
+Transformer 和 AlphaFold，一个是亲手打造了现代大模型技术底座与谷歌主力模型 Gemini 的“架构之神”，一个是代表了谷歌 AI-for-Science（科学人工智能）最高荣耀的诺奖科学家。
+Google 在短时间内连丢两张王牌，根据网友在社交媒体上分享的爆料信息，有内部人士称，“我不能责怪 Noam Shazeer 的离开，他也不会是最后一个离开 Google 的大人物。”
+从 GPT Image 2 全面碾压 Nano Banana 成为新一代 AI 生图之王，到视频生成模型 Gemini Omni Flash 发布时并未引起太多关注，很快就被字节的 Seedance 2 轻松击败。
+以及 Codex 和 Claude Code 几乎霸占了大部分的 Coding Agent 市场，Google 的 Antigravity 鲜有人知，以及 Anthropic 强到要被政府关闭的 Fable 5……
+“从模型到产品，进展极其缓慢，甚至全面溃败。”
+DeepMind 内部目前正蔓延着极度沮丧和广泛的不满，员工们普遍认为，这个曾经的全球第一的 AI 实验室，如今已经滑落到了行业中尴尬的第三、甚至第四名。
+在文本、图像、视频、语音甚至是视觉领域，我们已经不再拥有任何一个处于行业前沿（Frontier）的模型了…… 如果在拥有如此多资源、付出了超过四个月的努力之后，我们连一个真正的领跑者模型都拿不出来，我们到底在干什么？
+而根据谷歌内部人士透露，计划于 6 月 30 日发布的 Gemini 3.5 Pro，也并不是 Google 在通用人工智能（AGI）竞赛中真正具备竞争力所需的突破性创新。
+DeepMind 的高层似乎已经默认并接受了输给 Anthropic 和 OpenAI 的现实，表示只有“进行重大改革”才能让他们重回 2025 年中后期的巅峰状态。
+Google 还有机会再一次拿下 Nano Banana 时刻吗？
+分道扬镳的诺奖得主
+2024 年的诺贝尔化学奖，见证了Demis Hassabis 和 John Jumper这两位 DeepMind 巨头的至高荣耀。
+他们因为 AlphaFold 一起拿下这个奖。AlphaFold 预测了 2 亿多个蛋白质结构，把生物医学里原本要熬好几年的事，压成了几分钟。
+2024 年，年仅 39 岁的 John Jumper 与 DeepMind 首席执行官 Demis Hassabis 以及华盛顿大学的 David Baker 共同分享了诺贝尔化学奖。
+在生物学界，蛋白质折叠问题曾是一个困扰了人类长达半个世纪的终极难题。而 John Jumper 正是带领团队攻克这一难题的核心将领。作为 AlphaFold 项目的首席研究员和工程负责人，他主导了该 AI 系统的底层架构设计与演进。
+从 AlphaFold 2 首次以极高的精确度预测出蛋白质三维结构，到后来 AlphaFold 3 将预测范围扩展到所有生命分子（包括 DNA、RNA 及小分子配体），Jumper 的工作直接将结构生物学向前推进了数十年。
+全球数以百万计的研究人员正在使用他的模型来加速新药研发、抗病虫害农作物设计以及绿色酶的开发。
+在参与 AlphaFold 工作之前，John Jumper 本科在范德堡读物理和数学，一心想当个“纸笔派”理论物理学家。
+根据 LinkedIn 显示的信息，他之后拿了马歇尔奖学金去剑桥读博，结果发现用计算方法搞量子力学不对胃口，只拿了个硕士就退学回了美国。
+接下来三年，他在 D.E. Shaw Research 用超级计算机模拟蛋白质。2011 年又跑去芝加哥大学，把机器学习用到蛋白质折叠上，2017 年拿到理论化学博士，芝大的人后来叫他“误打误撞的化学家”。
+在芝加哥大学博士毕业之后，他就加入了 Google DeepMind。
+2018 年，他带领整个 AlphaFold 团队把整个系统推倒重做。两年后，AlphaFold2 在 CASP14 上把蛋白质结构预测的准确率做到 90%，这个数字，意味着跟实验室实测几乎一样。
+不仅懂生物，在底层架构和工程落地上的能力也是顶级的。John Jumper 在 DeepMind 内部主要负责 AI Coding 的工作，还是 AI Coding 开发团队的关键成员。
+他深度参与了谷歌对抗 GitHub Copilot、OpenAI 和 Anthropic 的 AI 编程工具与代码大模型的技术研发。
+他的离开，让谷歌在当前本就陷入苦战的“商业 AI 编程市场”上雪上加霜。
+由于 Google 相较于 OpenAI 和 Anthropic 一直在向企业出售 AI Coding Agent 路线上落后，而 AI Coding 又是整个 AI 领域的大饼，Google 不想失去这一阵地。
+跳槽到 Anthropic，一方面是 Claude 眼下是当之无愧的 AI Coding 最强模型。
+随着 Fable 5 的发布以及 GPT-5.6 的步步紧逼，Anthropic 今年还正在疯狂重金砸向“科学 AI”的赛道。
+他们不仅开始筹建真实的湿实验室（Wet Lab），发布了基于生物学的智能体（Bio-Agents）研究，还积极与顶尖医疗机构结盟。
+对于有着生物学的光环，还有 AI 编程工程战斗力的 Jumper 来说，留在此时的谷歌，显然已经不是最优解。
+输给智谱，DeepMind 内部信仰崩塌
+人才的流向大概也能看到一点行业的趋势，从去年 Meta 大举进攻花重金在闺蜜寻觅人才，到今年 Meta 新模型毫无水花，也再没 Meta 抢人大战相关的新闻。
+当这样的人开始选择离开时，市场看到的往往不是个人职业规划，而是一张关于未来的投票。
+因为顶尖研究员拥有比外界更多的信息。他们知道下一代模型进展到哪里，知道组织内部的资源正在流向什么方向，也知道真正的突破最有可能诞生在哪里。
+谷歌刚刚失去了 Gemini 的核心架构师 Noam Shazeer，跳槽到 OpenAI。而 John Jumper 的紧随其后，直接印证了爆料中 DeepMind 内部员工的绝望预言，“Noam 绝不会是最后一个出走的大牛。”
+回看 Google 这段时间的发展，在模型上，技术原地踏步，滑落至第五名。
+自今年 2 月发布 Gemini 3.1 Pro 以来，谷歌就没有发布过新的前沿机型。此前在 I/O 大会发布的模型 Gemini 3.5 Flash，在实际体验中不仅没有比 3.1 Pro 好多少，甚至在 Artificial Analysis Intelligence Index 上，谷歌最好的模型已经惨跌至第五名。
+除了被 Anthropic 和 OpenAI 牢牢压制，甚至被国产大模型智谱 GLM 反超。
+通用大模型之外，多模态也全面溃败。谷歌雄心勃勃推出的多模态小模型 Gemini Omni Flash，把图像编辑模型 Nano Banana Pro，推理模型 Gemini 以及世界模型 Genie 都融入进来，最后在市场上几乎没有激起任何水花。
+在社交媒体上曾经传播过几个相关的片段，但很快又被视频生成领域当下的冠军 Seedance 2 轻松碾压。
+对未来的绝望，更糟糕的是，DeepMind 员工透露，即将在 6 月 30 日推出的Gemini 3.5 Pro，在内部看来也根本无法带来质的突破，完全不足以让谷歌在这场 AGI 的军备竞赛中重回巅峰。
+就在这种“高层失落、技术掉队、算力资源被平庸商业化蚕食”的窒息氛围下，Noam Shazeer 走了，John Jumper 也走了。
+Noam Shazeer 去 OpenAI，很容易理解。大模型的竞争最终还是会回到训练、架构、数据和推理效率上。一个参与过 Transformer 论文、又在 Google 和 Character.AI 两边都做过模型的人，放到 OpenAI 内部，价值不需要多解释。
+Anthropic 拿下 John Jumper，更像是在给自己扩边界。Claude 做得再好，也不能永远只围绕文本、代码和企业助理讲故事。AI 公司接下来要争的，会越来越多地进入科学计算、生命科学、自动化研究这些领域。Jumper 的履历刚好能把这个方向变得具体。
+Anthropic 在 6 月 30 日即将举办一场 AI for Science 直播活动
+所以这两起跳槽真正刺痛 Google 的地方，并非“少了两个人”。
+Google 仍然有 Gemini、Veo、TPU、Android、Search、YouTube 和 Cloud 等等。它的资源厚度，OpenAI 和 Anthropic 短时间里很难复制。
+据此就说 Google 已经输了，太草率。
+麻烦在于，Google 发明了太多关键技术，也培养了太多关键人物。Transformer 诞生在 Google，AlphaFold 诞生在 DeepMind，可到了商业化和人才定价阶段，这些人未必继续把 Google 当成最好的舞台。
+如今，越来越多的人开始把 OpenAI 和 Anthropic 当成新的目的地。
+OpenAI 给的是最前沿的大模型战场。Anthropic 给的是更集中的研究文化和上升期公司股权。对顶级研究者来说，这些东西有时比大公司的稳定资源更有吸引力。
+或许比起 Gemini 排名下滑、产品失利、模型掉队，更值得 Google 警惕的是另一件事：当最优秀的人开始相信未来不在这里的时候，失去的往往不只是几位科学家，更是一部分关于下一代 AI 的想象力。
+AI原生产品日报
+频道: 前沿科技
+本内容来源于网络 原文链接，观点仅代表作者本人，不代表虎嗅立场。
+如涉及版权问题请联系 hezuo@huxiu.com，我们将及时核实并处理。
+正在改变与想要改变世界的人，都在 虎嗅APP
+赞赏
+支持一下
